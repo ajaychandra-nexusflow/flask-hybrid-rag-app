@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ app_name }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand"><span class="dot"></span><div><h1>{{ app_name }}</h1><p>{{ tagline }}</p></div></div>
+    <span id="health" class="pill">checking...</span>
+  </header>
+  <main class="layout">
+    <aside class="panel">
+      <h2>Documents</h2>
+      <label class="drop" id="drop">
+        <input id="file" type="file" multiple accept=".txt,.md,.csv,.pdf" hidden>
+        <strong>Upload files</strong><span>.txt .md .csv .pdf</span>
+      </label>
+      <div id="upmsg" class="muted"></div>
+      <ul id="docs" class="docs"></ul>
+      <h2>Retrieval</h2>
+      <label class="field">Mode
+        <select id="mode"><option value="hybrid">Hybrid (dense + keyword)</option><option value="dense">Dense only</option><option value="keyword">Keyword only</option></select>
+      </label>
+      <label class="field">Top K
+        <input id="topk" type="number" min="1" max="20" value="{{ top_k }}">
+      </label>
+    </aside>
+    <section class="chat">
+      <div id="log" class="log"><div class="empty">Upload a document, then ask a question.</div></div>
+      <form id="form" class="composer">
+        <input id="q" placeholder="Ask about your documents..." autocomplete="off" required>
+        <button id="send" type="submit">Send</button>
+      </form>
+    </section>
+  </main>
+  <script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>
